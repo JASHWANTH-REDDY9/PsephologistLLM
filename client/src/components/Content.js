@@ -1,23 +1,26 @@
 import React from 'react';
+import BjpChart from "../charts/BjpChart";
+import CongressChart from "../charts/CongressChart";
+import APPChart from "../charts/AAPChart";
 
 const Content = ({ selected }) => {
     const contentMap = {
         1: (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
-                <div style={{ display: 'flex', flexDirection: 'column'}}>
-                Bar Plot
-                <img src="http://127.0.0.1:5000/plot/sa-bar.png" alt="Sentiment Pie Chart" style={{ width: '70%' }} /></div>
-                <img src="http://127.0.0.1:5000/plot/sa-pie.png" alt="Sentiment Distribution" style={{ width: '40%' }} />
                 
+                <BjpChart />
             </div>
         ),
         2: (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
-                <img src="http://127.0.0.1:5000/plot/sa-bar1.png" alt="Sentiment Pie Chart" style={{ width: '40%' }} />
-                <img src="http://127.0.0.1:5000/plot/sa-pie1.png" alt="Sentiment Distribution" style={{ width: '40%' }} />
+                <CongressChart />
             </div>
         ),
-        3: 'Content for Button 3',
+        3: (
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
+                <APPChart />
+            </div>
+        ),
         4: 'Content for Button 4',
         5: 'Content for Button 5',
         6: 'Content for Button 6',

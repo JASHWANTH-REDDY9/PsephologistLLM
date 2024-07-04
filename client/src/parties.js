@@ -4,6 +4,7 @@ import Footer from "./components/footer";
 import Sidebar from "./components/sidebar";
 import Content from "./components/Content";
 import "./components/stylesidebar.css";
+// import BjpChart from "./charts/BjpChart";
 
 const Party = () => {
     const [selected, setSelected] = useState(1);
@@ -17,6 +18,7 @@ const Party = () => {
             <Header />
             <div style={{ flex: '1', display: 'flex', flexDirection: 'row' }}>
                 <Sidebar onSelect={handleSelect} />
+                {/* <BjpChart /> */}
                 <Content selected={selected} />
             </div>
             <Footer />

@@ -4,6 +4,7 @@ from models import create_user, find_user, save_contact_message
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
+import json
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -21,6 +22,16 @@ def chat_endpoint():
     response = chat.send_message(user_message, stream=True)
     bot_reply = ''.join([chunk.text for chunk in response])
     return jsonify({'reply': bot_reply})
+
+@app.route('/api/data')
+def data():
+    try:
+        with open('../sentiment_data.json', 'r') as f:
+            data = json.load(f)
+        return jsonify(data)
+    except Exception as e:
+        app.logger.error(f"Error loading data: {str(e)}")
+        return jsonify({'error': str(e)})
 
 @app.route('/api/signup', methods=['POST'])
 def signup():

@@ -5,8 +5,8 @@ const Sidebar = ({ onSelect }) => {
         <div className="sidebar" style={{ width: '14%', background: '#2d2c38', padding: '10px' }}>
             <button onClick={() => onSelect(1)}>Bharatiya Janata Party (BJP)</button>
             <button onClick={() => onSelect(2)}>Indian National Congress (INC)</button>
-            <button onClick={() => onSelect(3)}>Communist Party of India (CPI)</button>
-            <button onClick={() => onSelect(4)}>Communist Party of India (Marxist) (CPI(M))</button>
+            <button onClick={() => onSelect(3)}>Aam Aadmi Party (AAP)</button>
+            <button onClick={() => onSelect(4)}>Communist Party of India (CPI)</button>
             <button onClick={() => onSelect(5)}>Bahujan Samaj Party (BSP)</button>
             <button onClick={() => onSelect(6)}>Nationalist Congress Party (NCP)</button>
             <button onClick={() => onSelect(7)}>All India Trinamool Congress (AITC)</button>

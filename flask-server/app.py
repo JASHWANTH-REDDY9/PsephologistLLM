@@ -12,8 +12,6 @@ CORS(app)  # Enable CORS for all routes
 # app.register_blueprint( url_prefix='/api')
 
 # Configure Google API key
-# os.getenv("AIzaSyC-6CFCa1-O6xfskb_Xs2rirUJ7YIdd6Ws")
-# genai.configure(api_key=os.getenv("AIzaSyC-6CFCa1-O6xfskb_Xs2rirUJ7YIdd6Ws"))
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel('gemini-pro')
@@ -22,6 +20,12 @@ chat = model.start_chat(history=[])
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/data')
+def data():
+    with open('sentiment_data.json', 'r') as f:
+        data = json.load(f)
+    return jsonify(data)
 
 @app.route('/chat', methods=['POST'])
 def chat():
