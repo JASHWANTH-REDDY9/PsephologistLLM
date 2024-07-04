@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "//jashwanth-reddy9.github.io/PsephologistLLM/static/css/main.1aaee8fc.css",
+    "main.js": "//jashwanth-reddy9.github.io/PsephologistLLM/static/js/main.b77a2630.js",
+    "index.html": "//jashwanth-reddy9.github.io/PsephologistLLM/index.html",
+    "main.1aaee8fc.css.map": "//jashwanth-reddy9.github.io/PsephologistLLM/static/css/main.1aaee8fc.css.map",
+    "main.b77a2630.js.map": "//jashwanth-reddy9.github.io/PsephologistLLM/static/js/main.b77a2630.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1aaee8fc.css",
+    "static/js/main.b77a2630.js"
+  ]
+}
