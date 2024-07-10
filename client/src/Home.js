@@ -14,7 +14,7 @@ const Home = () => {
             <div className="col-md-8 col-lg-6 col-xl-6 text-center text-md-start mx-auto" style={{ overflow: 'hidden' }}>
               <div className="text-center">
                 <p className="fw-bold text-success mb-2">PsephologistLLM</p>
-                <h1 className="fw-bold">One stop solution for your election queries</h1>
+                <h1 className="fw-bold">One stop solution for your election queries.</h1>
                 <br></br>
                 <br></br>
               </div>
