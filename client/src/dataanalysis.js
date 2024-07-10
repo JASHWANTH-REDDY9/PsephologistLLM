@@ -4,6 +4,7 @@ import Footer from './components/footer';
 import data from './components/extracted_data.json';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const Dataanalysis = () => {
     const [selectedYear, setSelectedYear] = useState('');
@@ -74,6 +75,7 @@ const Dataanalysis = () => {
 
     const handleAnalyze = async () => {
         if (selectedYear && selectedState && selectedConstituency) {
+            setLoading(true);
             const prompt = `Give me party wise performance for ${selectedConstituency} constituency in the year ${selectedYear}`;
             console.log('Generated Prompt:', prompt);
             try {
@@ -89,6 +91,8 @@ const Dataanalysis = () => {
                 prepareChartData(result);
             } catch (error) {
                 console.error('Error analyzing data:', error);
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -135,10 +139,21 @@ const Dataanalysis = () => {
                 </div>
                 <button onClick={handleAnalyze} className="btn btn-light" style={{ margin: '4%' }}>Analyze</button>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row', minHeight: '54vh', justifyContent: 'space-around', alignItems: 'center' }}>
-                {loading ? <p>Loading...</p> : chartData ? <Pie data={chartData} style={{ maxWidth: '700px', maxHeight: '700px' }} /> : null}
-                {Array.isArray(analysisResult) && analysisResult.length > 0 && (
-                    <div>
+            <div style={{ display: 'flex', flexDirection: 'row', minHeight: '54vh', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#ece2e2', marginLeft: '10%', marginRight: '10%', paddingTop: '3%', paddingBottom: '3%', borderRadius: '20px' }}>
+                {loading ? <p>Loading...</p> : chartData ? <Pie data={chartData} options={{
+                    plugins: {
+                        datalabels: {
+                            color: 'black',
+                            formatter: (value, context) => {
+                                const sum = context.dataset.data.reduce((acc, val) => acc + val, 0);
+                                const percentage = (value / sum * 100).toFixed(2) + '%';
+                                return percentage;
+                            }
+                        }
+                    }
+                }} plugins={[ChartDataLabels]} style={{ maxWidth: '600px', maxHeight: '600px' }} /> : null}
+                {Array.isArray(analysisResult) && analysisResult.length > 0 &&  (
+                    <div style={{ backgroundColor: '#383636', padding: '1%', borderRadius: '10px' }}>
                         <h3>Analysis Result:</h3>
                         <ul>
                             {analysisResult.map((item, index) => (
