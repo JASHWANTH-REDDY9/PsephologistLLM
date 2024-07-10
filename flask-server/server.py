@@ -7,7 +7,7 @@ import pymysql
 from langchain_community.llms import Ollama
 
 # Configure Ollama
-ollama = Ollama(base_url="http://localhost:11434", model="llama2")
+ollama = Ollama(model="phi3")
 
 def get_llama2_response(question, prompt):
     # Combine prompt and question into a single input for the Llama2 model
@@ -18,7 +18,7 @@ def get_llama2_response(question, prompt):
 def read_sql_query(sql, db):
     config = {
         'user': 'root',
-        'password': 'root123',
+        'password': 'Indra2565',
         'host': 'localhost',
         'database': 'voting',
         'cursorclass': pymysql.cursors.DictCursor

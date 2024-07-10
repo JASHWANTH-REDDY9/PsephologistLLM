@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "/Users/apple/Library/Mobile Documents/com~apple~CloudDocs/Documents/PS 2-2/Psephologist/flask-server/venv")
+    export VIRTUAL_ENV=$(cygpath "/Users/apple/Documents/Psephologist/flask-server/venv")
 else
     # use the path as-is
-    export VIRTUAL_ENV="/Users/apple/Library/Mobile Documents/com~apple~CloudDocs/Documents/PS 2-2/Psephologist/flask-server/venv"
+    export VIRTUAL_ENV="/Users/apple/Documents/Psephologist/flask-server/venv"
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
