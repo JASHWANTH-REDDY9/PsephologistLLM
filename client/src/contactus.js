@@ -25,7 +25,7 @@ const Contactus = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://127.0.0.1:5000/api/contact", { name, email, message});
+      const response = await axios.post("http://127.0.0.1:5000/api/contact", { name, email, message });
 
       if (response.data.success) {
         setResponseMessage("Message sent successfully!");

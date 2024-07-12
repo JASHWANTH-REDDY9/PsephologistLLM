@@ -128,25 +128,5 @@ def contact():
 
     return jsonify({'success': True}), 200
 
-# @app.route('/plot/<filename>')
-# def get_plot(filename):
-#     return send_from_directory('plots', filename)
-
-# @app.route('/plot/sa-bar.png')
-# def plots():
-#     return send_file('../plots/sa-bar.png')
-
-# @app.route('/plot/sa-pie.png')
-# def plots1():
-#     return send_file('../plots/sa-pie.png')
-
-# @app.route('/plot/sa-pie1.png')
-# def plots2():
-#     return send_file('../plots/sa-pie1.png')
-
-# @app.route('/plot/sa-bar1.png')
-# def plots3():
-#     return send_file('../plots/sa-bar1.png')
-
 if __name__ == '__main__':
     app.run(debug=True)
