@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/header';
 import Footer from './components/footer';
 import data from './components/extracted_data.json';
-import { Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
@@ -52,7 +52,7 @@ const Dataanalysis = () => {
                 labels: Object.keys(partyData),
                 datasets: [
                     {
-                        label: `Party wise performance for ${selectedConstituency} constituency in ${selectedYear}`,
+                        label: `Party wise performance${selectedConstituency ? ` for ${selectedConstituency} constituency` : ''}${selectedState ? ` in ${selectedState.replace(/_/g, ' ')}` : ''} in ${selectedYear}`,
                         data: Object.values(partyData),
                         backgroundColor: [
                             'red',
@@ -74,9 +74,14 @@ const Dataanalysis = () => {
     };
 
     const handleAnalyze = async () => {
-        if (selectedYear && selectedState && selectedConstituency) {
+        let prompt = '';
+        if (selectedYear) prompt += ` for the year ${selectedYear}`;
+        if (selectedState) prompt += ` in ${selectedState.replace(/_/g, ' ')}`;
+        if (selectedConstituency) prompt += ` for ${selectedConstituency} constituency`;
+
+        if (prompt) {
             setLoading(true);
-            const prompt = `Give me party wise performance for ${selectedConstituency} constituency in the year ${selectedYear}`;
+            prompt = `Give me party wise performance${prompt}`;
             console.log('Generated Prompt:', prompt);
             try {
                 const response = await fetch('http://127.0.0.1:5000/api/analyze', {
@@ -140,7 +145,7 @@ const Dataanalysis = () => {
                 <button onClick={handleAnalyze} className="btn btn-light" style={{ margin: '4%' }}>Analyze</button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'row', minHeight: '54vh', justifyContent: 'space-around', alignItems: 'center', backgroundColor: '#ece2e2', marginLeft: '10%', marginRight: '10%', paddingTop: '3%', paddingBottom: '3%', borderRadius: '20px' }}>
-                {loading ? <p>Loading...</p> : chartData ? <Pie data={chartData} options={{
+                {loading ? <p>Loading...</p> : chartData ? <Bar data={chartData} options={{
                     plugins: {
                         datalabels: {
                             color: 'black',
@@ -151,8 +156,8 @@ const Dataanalysis = () => {
                             }
                         }
                     }
-                }} plugins={[ChartDataLabels]} style={{ maxWidth: '600px', maxHeight: '600px' }} /> : null}
-                {Array.isArray(analysisResult) && analysisResult.length > 0 &&  (
+                }} plugins={[ChartDataLabels]} style={{ maxWidth: '1500px', maxHeight: '600px' }} /> : null}
+                {/* {Array.isArray(analysisResult) && analysisResult.length > 0 && (
                     <div style={{ backgroundColor: '#383636', padding: '1%', borderRadius: '10px' }}>
                         <h3>Analysis Result:</h3>
                         <ul>
@@ -163,7 +168,7 @@ const Dataanalysis = () => {
                             ))}
                         </ul>
                     </div>
-                )}
+                )} */}
             </div>
             <Footer />
         </div>

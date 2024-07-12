@@ -72,6 +72,7 @@ import json
 df_bjp = pd.read_csv("/Users/apple/Downloads/bjp_tweets.csv")
 df_congress = pd.read_csv("/Users/apple/Downloads/congress_tweets.csv")
 df_AAP = pd.read_csv("/Users/apple/Downloads/Arvind Kejriwal_data.csv")
+df_DMK = pd.read_csv("/Users/apple/Downloads/translated_tweets.csv")
 
 # Function to calculate polarity
 def polarity(text):
@@ -80,6 +81,7 @@ def polarity(text):
 df_bjp['polarity'] = df_bjp['tweet'].apply(polarity)
 df_congress['polarity'] = df_congress['tweet'].apply(polarity)
 df_AAP['polarity'] = df_AAP['Tweet'].apply(polarity)
+df_DMK['polarity'] = df_DMK['Tweets'].apply(polarity)
 
 # Function to classify sentiment
 def sentiment(label):
@@ -93,16 +95,19 @@ def sentiment(label):
 df_bjp['sentiment'] = df_bjp['polarity'].apply(sentiment)
 df_congress['sentiment'] = df_congress['polarity'].apply(sentiment)
 df_AAP['sentiment'] = df_AAP['polarity'].apply(sentiment)
+df_DMK['sentiment'] = df_DMK['polarity'].apply(sentiment)
 
 # Save sentiment counts to JSON
 bjp_sentiment_counts = df_bjp['sentiment'].value_counts().to_dict()
 congress_sentiment_counts = df_congress['sentiment'].value_counts().to_dict()
 AAP_sentiment_counts = df_AAP['sentiment'].value_counts().to_dict()
+DMK_sentiment_counts = df_DMK['sentiment'].value_counts().to_dict()
 
 data = {
     'bjp': bjp_sentiment_counts,
     'congress': congress_sentiment_counts,
-    'AAP': AAP_sentiment_counts
+    'AAP': AAP_sentiment_counts,
+    'DMK': DMK_sentiment_counts
 }
 
 with open('sentiment_data.json', 'w') as f:

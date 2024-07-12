@@ -3,7 +3,7 @@ import mysql.connector
 from mysql.connector import errorcode
 
 # Load the cleaned data from CSV file
-file_path = "/Users/apple/Downloads/final2.csv"
+file_path = "/Users/apple/Downloads/final4.csv"
 
 # Specify the data types for the problematic columns
 dtype_spec = {8: str, 11: str}
@@ -11,14 +11,11 @@ dtype_spec = {8: str, 11: str}
 # Read the CSV file with specified data types
 df = pd.read_csv(file_path, dtype=dtype_spec, low_memory=False)
 
-# Replace null values with a placeholder
-df.fillna(value='None', inplace=True)
-
 # Convert Vote_Share_Percentage to the correct data type (float)
 df['Vote_Share_Percentage'] = pd.to_numeric(df['Vote_Share_Percentage'].str.strip(), errors='coerce')
 
 # Handle any potential invalid data by replacing them with a default value (e.g., 0.0)
-df['Vote_Share_Percentage'].fillna(0.0, inplace=True)
+df['Vote_Share_Percentage'] = df['Vote_Share_Percentage'].fillna(0.0)
 
 # Database connection configuration
 config = {
@@ -62,7 +59,4 @@ except mysql.connector.Error as err:
         print("Database does not exist")
     else:
         print(err)
-# finally:
-#     # Closing the cursor and connection
-#     cursor.close()
-#     cnx.close()
+

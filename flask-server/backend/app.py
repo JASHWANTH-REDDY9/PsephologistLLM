@@ -19,8 +19,6 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel('gemini-pro')
 chat = model.start_chat(history=[])
 
-
-
 def get_llama2_response(question, prompt):
     combined_input = prompt + "\n\n" + question
     response = ollama.invoke(combined_input)
@@ -45,17 +43,26 @@ def read_sql_query(sql):
 prompt = """You are an expert in converting English questions to SQL queries! You generate only the SQL query without any explanation. 
 The SQL database has the name election_data and has the following columns - State_Name, Constituency_No, Year, Position, Candidate, Party, Votes, Valid_Votes, Electors, Constituency_Name, Turnout_Percentage, Vote_Share_Percentage, Deposit_Lost, Margin, Margin_Percentage, ENOP, Party_Type_TCPD.
 
-Ensure that the Constituency_Name in the SQL query exactly matches the Constituency_Name provided in the question.
+Always copy the Constituency_Name exactly as it is provided in the question without making any changes.Dont change the Constitunecy name take the as it is Constituency_Name from the prompt.
+Don't give any spelling mistakes in the Constituency_Name.
+Copy the constituency name as it is don't change the name of the constituency.
+
 
 For example:
-
 Example 1 - Give me party wise performance for NAGARKURNOOL constituency in the year 2019
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Name = "NAGARKURNOOL" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
 Example 2 - Give me party wise performance for MAHBUBNAGAR constituency in the year 2019
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Name = "MAHBUBNAGAR" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
+Example 3 - Give me party wise performance for ADILABAD constituency in the year 2019
+SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Name = "ADILABAD" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
+Example 3 - Give me party wise performance for the year 2019 in Andhra Pradesh
+SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE State_Name = "Andhra_Pradesh" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
+
+Example 4 - Give me party wise performance for the year 2019
+SELECT Party, COUNT(*) AS Seats_Won FROM election_data WHERE Year = 2019 AND Position = 1 GROUP BY Party ORDER BY Seats_Won DESC;
 """
 
 @app.route('/api/analyze', methods=['POST'])
@@ -70,9 +77,6 @@ def analyze():
         return jsonify(sql_result)  # Return JSON response here
     except pymysql.MySQLError as e:
         return jsonify({"error": str(e)})
-
-
-
 
 @app.route('/api/chat', methods=['POST'])
 def chat_endpoint():
@@ -124,25 +128,25 @@ def contact():
 
     return jsonify({'success': True}), 200
 
-@app.route('/plot/<filename>')
-def get_plot(filename):
-    return send_from_directory('plots', filename)
+# @app.route('/plot/<filename>')
+# def get_plot(filename):
+#     return send_from_directory('plots', filename)
 
-@app.route('/plot/sa-bar.png')
-def plots():
-    return send_file('../plots/sa-bar.png')
+# @app.route('/plot/sa-bar.png')
+# def plots():
+#     return send_file('../plots/sa-bar.png')
 
-@app.route('/plot/sa-pie.png')
-def plots1():
-    return send_file('../plots/sa-pie.png')
+# @app.route('/plot/sa-pie.png')
+# def plots1():
+#     return send_file('../plots/sa-pie.png')
 
-@app.route('/plot/sa-pie1.png')
-def plots2():
-    return send_file('../plots/sa-pie1.png')
+# @app.route('/plot/sa-pie1.png')
+# def plots2():
+#     return send_file('../plots/sa-pie1.png')
 
-@app.route('/plot/sa-bar1.png')
-def plots3():
-    return send_file('../plots/sa-bar1.png')
+# @app.route('/plot/sa-bar1.png')
+# def plots3():
+#     return send_file('../plots/sa-bar1.png')
 
 if __name__ == '__main__':
     app.run(debug=True)
