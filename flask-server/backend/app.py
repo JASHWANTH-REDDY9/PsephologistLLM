@@ -46,23 +46,33 @@ The SQL database has the name election_data and has the following columns - Stat
 Always copy the Constituency_Name exactly as it is provided in the question without making any changes.Dont change the Constitunecy name take the as it is Constituency_Name from the prompt.
 Don't give any spelling mistakes in the Constituency_Name.
 Copy the constituency name as it is don't change the name of the constituency.
-
-
+Check the below examples for reference.
+For the below examples you can use the below SQL query to get the results.
+please give the queries given in the examples to get the results.
+limit to 15 rows for the results.
 For example:
-Example 1 - Give me party wise performance for NAGARKURNOOL constituency in the year 2019
+Example 1 - Give me party wise performance for the year 2019
+SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Year = 2019 GROUP BY Party ORDER BY total_votes DESC LIMIT 15;
+
+Example 2 - Give me party wise performance for the year 2020
+SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Year = 2020 GROUP BY Party ORDER BY total_votes DESC LIMIT 15;
+
+Example 3 - Give me party wise performance for the year 2014
+SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Year = 2014 GROUP BY Party ORDER BY total_votes DESC LIMIT 15;
+
+Example 4 - Give me party wise performance for NAGARKURNOOL constituency in the year 2019
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Name = "NAGARKURNOOL" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
-Example 2 - Give me party wise performance for MAHBUBNAGAR constituency in the year 2019
+Example 5 - Give me party wise performance for MAHBUBNAGAR constituency in the year 2019
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Name = "MAHBUBNAGAR" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
-Example 3 - Give me party wise performance for ADILABAD constituency in the year 2019
+Example 6 - Give me party wise performance for ADILABAD constituency in the year 2019
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Name = "ADILABAD" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
-Example 3 - Give me party wise performance for the year 2019 in Andhra Pradesh
+Example 7 - Give me party wise performance for the year 2021 in Andhra Pradesh
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE State_Name = "Andhra_Pradesh" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
 
-Example 4 - Give me party wise performance for the year 2019
-SELECT Party, COUNT(*) AS Seats_Won FROM election_data WHERE Year = 2019 AND Position = 1 GROUP BY Party ORDER BY Seats_Won DESC;
+
 """
 
 @app.route('/api/analyze', methods=['POST'])

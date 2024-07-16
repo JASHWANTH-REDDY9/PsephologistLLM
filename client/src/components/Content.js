@@ -3,6 +3,8 @@ import BjpChart from "../charts/BjpChart";
 import CongressChart from "../charts/CongressChart";
 import APPChart from "../charts/AAPChart";
 import DMKChart from "../charts/DMKChart";
+import NPPChart from '../charts/NPPChart';
+import BSPChart from '../charts/BSPChart';
 
 const Content = ({ selected }) => {
     const contentMap = {
@@ -23,14 +25,22 @@ const Content = ({ selected }) => {
             </div>
         ),
         4: 'Content for Button 5',
-        5: 'Content for Button 6',
+        5: (
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
+                <BSPChart />
+            </div>
+        ),
         6: (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
                 <DMKChart />
             </div>
         ),
         7: 'Content for Button 7',
-        8: 'Content for Button 8',
+        8: (
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
+                <NPPChart />
+            </div>
+        ),
     };
 
     return (
