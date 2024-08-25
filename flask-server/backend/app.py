@@ -75,6 +75,99 @@ SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE State_Name = "A
 
 """
 
+# Sample data for prediction (You can modify and expand this as needed)
+with open('../prediction.json', 'r') as f:
+    party_data = json.load(f)
+
+def predict_winning_party(party_data):
+    scores = {}
+    for party, data in party_data.items():
+        # Adjust the weight of each factor as needed
+        score = (
+            data["ApprovalRating"] * 0.25 +
+            data["RecentElectionWins"] * 0.15 +
+            data["LeaderPopularity"] * 0.15 +
+            data["SocialMediaInfluence"] * 0.1 +
+            data["Funding"] * 0.1 +
+            (10 if data["IncumbencyFactor"] == "Yes" else 0) +
+            data["Positive"] * 0.15 -  # Positive sentiment boosts the score
+            data["Negative"] * 0.1 +   # Negative sentiment reduces the score
+            data["Neutral"] * 0.05     # Neutral sentiment has a smaller impact
+        )
+        scores[party] = score
+
+    winning_party = max(scores, key=scores.get)
+    return winning_party
+
+
+@app.route('/api/predict', methods=['POST'])
+def predict_endpoint():
+    question = request.json.get('question')
+    
+    if "likely to win" in question.lower():
+        winning_party = predict_winning_party(party_data)
+        answer = f"Based on the current data, <strong>{winning_party.upper()}</strong> is most likely to win the next election."
+    
+    elif "positive sentiment percentage" in question.lower():
+        party_name = "bjp"  # Example for BJP; you can expand this logic
+        answer = f"The positive sentiment percentage for <strong>BJP</strong> is <strong>{party_data[party_name]['Positive']}%</strong>."
+    
+    elif "seats does congress" in question.lower():
+        answer = f"<strong>Congress</strong> currently holds <strong>{party_data['congress']['Current']}</strong> seats in the Lok Sabha."
+    
+    elif "funding amount for aap" in question.lower():
+        answer = f"The funding amount for <strong>AAP</strong> is <strong>{party_data['aap']['Funding']}</strong> crores."
+    
+    elif "leader popularity of bjp" in question.lower():
+        answer = f"The leader popularity rating for <strong>BJP</strong> is <strong>{party_data['bjp']['LeaderPopularity']}</strong>."
+    
+    elif "likely to win the most seats" in question.lower():
+        winning_party = predict_winning_party(party_data)
+        answer = f"Based on the current data, <strong>{winning_party.upper()}</strong> is likely to win the most seats in the upcoming election."
+    
+    elif "bjp maintain its current majority" in question.lower():
+        bjp_seats = party_data["bjp"]["Current"]
+        answer = f"<strong>BJP</strong> currently holds <strong>{bjp_seats}</strong> seats. Whether it will maintain this majority depends on voter turnout and sentiment shifts."
+    
+    elif "congress expected to gain more seats" in question.lower():
+        congress_seats = party_data["congress"]["Current"]
+        answer = f"<strong>Congress</strong> currently holds <strong>{congress_seats}</strong> seats. The chances of gaining more seats will depend on campaign strategies and voter sentiment."
+    
+    elif "decline in voter support" in question.lower():
+        decline_party = min(party_data, key=lambda p: party_data[p]["Positive"] - party_data[p]["Negative"])
+        answer = f"Based on current sentiment data, <strong>{decline_party.upper()}</strong> is likely to experience a decline in voter support."
+    
+    elif "coalition government forming" in question.lower():
+        answer = "There is a strong possibility of a coalition government forming post-election depending on the distribution of seats among parties."
+    
+    elif "highest probability of forming the government" in question.lower():
+        winning_party = predict_winning_party(party_data)
+        answer = f"<strong>{winning_party.upper()}</strong> has the highest probability of forming the government in the upcoming election."
+    
+    elif "expected overall performance" in question.lower():
+        performance = {party: f"{data['Positive']}% positive sentiment and {data['Current']} current seats" for party, data in party_data.items()}
+        answer = "<ul>"
+        for party, details in performance.items():
+            answer += f"<li><strong>{party.upper()}:</strong> {details}</li>"
+        answer += "</ul>"
+    
+    elif "predicted change in seat count" in question.lower():
+        change_in_seats = {party: "increased" if data["ApprovalRating"] > 50 else "decreased" for party, data in party_data.items()}
+        answer = "<ul>"
+        for party, change in change_in_seats.items():
+            answer += f"<li><strong>{party.upper()}:</strong> {change}</li>"
+        answer += "</ul>"
+    
+    elif "major impact of the future winning party" in question.lower():
+        winning_party = predict_winning_party(party_data)
+        answer = f"The major impact of <strong>{winning_party.upper()}</strong> winning the upcoming election could include policy shifts, economic changes, and social reforms based on their agenda."
+    
+    else:
+        answer = "Sorry, I don't have an answer for that question."
+
+    return jsonify({'answer': answer})
+
+
 @app.route('/api/analyze', methods=['POST'])
 def analyze():
     data = request.get_json()

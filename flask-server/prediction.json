@@ -1,0 +1,107 @@
+{
+    "bjp": {
+      "Positive": 43.5,
+      "Neutral": 35.0,
+      "Negative": 21.5,
+      "Current": 301,
+      "ApprovalRating": 65,
+      "RecentElectionWins": 4,
+      "LeaderPopularity": 70,
+      "SocialMediaInfluence": 10000000,
+      "Funding": 5000,
+      "CoalitionStrength": 10,
+      "IncumbencyFactor": "Yes"
+    },
+    "congress": {
+      "Positive": 30.5,
+      "Neutral": 34.5,
+      "Negative": 35.0,
+      "Current": 53,
+      "ApprovalRating": 50,
+      "RecentElectionWins": 2,
+      "LeaderPopularity": 55,
+      "SocialMediaInfluence": 8000000,
+      "Funding": 3000,
+      "CoalitionStrength": 5,
+      "IncumbencyFactor": "No"
+    },
+    "aap": {
+      "Positive": 32.0,
+      "Neutral": 52.5,
+      "Negative": 15.5,
+      "Current": 1,
+      "ApprovalRating": 60,
+      "RecentElectionWins": 3,
+      "LeaderPopularity": 65,
+      "SocialMediaInfluence": 6000000,
+      "Funding": 2000,
+      "CoalitionStrength": 2,
+      "IncumbencyFactor": "No"
+    },
+    "cpi": {
+      "Neutral": 33.3,
+      "Positive": 33.3,
+      "Negative": 33.3,
+      "Current": 2,
+      "ApprovalRating": 40,
+      "RecentElectionWins": 1,
+      "LeaderPopularity": 45,
+      "SocialMediaInfluence": 100000,
+      "Funding": 100,
+      "CoalitionStrength": 3,
+      "IncumbencyFactor": "No"
+    },
+    "dmk": {
+      "Neutral": 33.3,
+      "Positive": 33.3,
+      "Negative": 33.3,
+      "Current": 24,
+      "ApprovalRating": 70,
+      "RecentElectionWins": 2,
+      "LeaderPopularity": 60,
+      "SocialMediaInfluence": 3000000,
+      "Funding": 1500,
+      "CoalitionStrength": 4,
+      "IncumbencyFactor": "No"
+    },
+    "aitc": {
+      "Neutral": 33.3,
+      "Positive": 33.3,
+      "Negative": 33.3,
+      "Current": 23,
+      "ApprovalRating": 55,
+      "RecentElectionWins": 2,
+      "LeaderPopularity": 65,
+      "SocialMediaInfluence": 4000000,
+      "Funding": 2000,
+      "CoalitionStrength": 3,
+      "IncumbencyFactor": "No"
+    },
+    "npp": {
+      "Neutral": 72.0,
+      "Positive": 19.0,
+      "Negative": 9.0,
+      "Current": 1,
+      "ApprovalRating": 50,
+      "RecentElectionWins": 1,
+      "LeaderPopularity": 50,
+      "SocialMediaInfluence": 50000,
+      "Funding": 100,
+      "CoalitionStrength": 1,
+      "IncumbencyFactor": "No"
+    },
+    "bsp": {
+      "Neutral": 63.0,
+      "Negative": 29.0,
+      "Positive": 8.0,
+      "Current": 10,
+      "ApprovalRating": 45,
+      "RecentElectionWins": 1,
+      "LeaderPopularity": 50,
+      "SocialMediaInfluence": 2000000,
+      "Funding": 500,
+      "CoalitionStrength": 2,
+      "IncumbencyFactor": "No"
+    }
+  }
+  

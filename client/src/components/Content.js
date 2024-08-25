@@ -5,6 +5,8 @@ import APPChart from "../charts/AAPChart";
 import DMKChart from "../charts/DMKChart";
 import NPPChart from '../charts/NPPChart';
 import BSPChart from '../charts/BSPChart';
+import CPIChart from '../charts/CPIChart';
+import AITCChart from '../charts/AITCChart';
 
 const Content = ({ selected }) => {
     const contentMap = {
@@ -24,7 +26,11 @@ const Content = ({ selected }) => {
                 <APPChart />
             </div>
         ),
-        4: 'Content for Button 5',
+        4: (
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
+                <CPIChart />
+            </div>
+        ),
         5: (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
                 <BSPChart />
@@ -35,7 +41,11 @@ const Content = ({ selected }) => {
                 <DMKChart />
             </div>
         ),
-        7: 'Content for Button 7',
+        7: (
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
+                <AITCChart />
+            </div>
+        ),
         8: (
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent:'center', alignItems:'center' }}>
                 <NPPChart />

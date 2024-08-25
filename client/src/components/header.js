@@ -23,7 +23,7 @@ const Header = () => {
               <li className="nav-item"><a className="nav-link active" href="home">Home</a></li>
               <li className="nav-item"><a className="nav-link" href="parties">Parties</a></li>
               <li className="nav-item"><a className="nav-link" href="Dataanalysis">Data Analysis</a></li>
-              {/* <li className="nav-item"><a className="nav-link" href="pricing.html">Pricing</a></li> */}
+              <li className="nav-item"><a className="nav-link" href="prediction">Prediction</a></li>
               <li className="nav-item"><a className="nav-link active" href="contact">Contacts</a></li>
             </ul>
             <a className="btn btn-primary shadow" role="button" href="chatbot" style={{ borderWidth: '1px' }}>Chat bot</a>
