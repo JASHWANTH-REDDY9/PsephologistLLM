@@ -10,20 +10,22 @@ const Prediction = () => {
   const [loading, setLoading] = useState(false);
 
   const questions = [
-    "Which party is likely to win the next election?",
-    "What is the positive sentiment percentage for BJP?",
-    "How many seats does Congress currently hold?",
-    "What is the funding amount for AAP?",
-    "What is the leader popularity of BJP?",
-    "Which party is likely to win the most seats in the upcoming election?",
-    "Will BJP maintain its current majority in the upcoming election?",
-    "Is Congress expected to gain more seats in the next election?",
-    "Which party is likely to experience a decline in voter support in the upcoming election?",
-    "Is there a strong chance of a coalition government forming post-election?",
-    "Which party has the highest probability of forming the government in the upcoming election?",
-    "What is the expected overall performance of each party in the upcoming election?",
-    "What is the predicted change in seat count for each party?",
-    "What is the major impact of the future winning party on their success in upcoming elections?",
+    "Predicted seat count for BJP",
+    "Seat changes compared to previous election",
+    "Party likely to win most seats",
+    "BJP maintaining majority",
+    "Congress gaining more seats",
+    "Party likely to experience decline in support",
+    "Chance of coalition government forming",
+    "Party with highest probability of forming government",
+    "Expected overall performance of each party",
+    "Predicted change in seat count for each party",
+    // "Which party is likely to experience a decline in voter support in the upcoming election?",
+    // "Is there a strong chance of a coalition government forming post-election?",
+    // "Which party has the highest probability of forming the government in the upcoming election?",
+    // "What is the expected overall performance of each party in the upcoming election?",
+    // "What is the predicted change in seat count for each party?",
+    // "What is the major impact of the future winning party on their success in upcoming elections?",
     // Add more predefined questions as needed
   ];
 

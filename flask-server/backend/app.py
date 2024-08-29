@@ -71,37 +71,49 @@ SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE Constituency_Na
 
 Example 7 - Give me party wise performance for the year 2021 in Andhra Pradesh
 SELECT Party, SUM(Votes) AS total_votes FROM election_data WHERE State_Name = "Andhra_Pradesh" AND Year = 2019 GROUP BY Party ORDER BY total_votes DESC;
-
-
 """
 
 # Sample data for prediction (You can modify and expand this as needed)
 with open('../prediction.json', 'r') as f:
-    party_data = json.load(f)
+    predictions = json.load(f)
 
-def predict_winning_party(party_data):
-    scores = {}
-    for party, data in party_data.items():
-        # Adjust the weight of each factor as needed
-        score = (
-            data["ApprovalRating"] * 0.25 +
-            data["RecentElectionWins"] * 0.15 +
-            data["LeaderPopularity"] * 0.15 +
-            data["SocialMediaInfluence"] * 0.1 +
-            data["Funding"] * 0.1 +
-            (10 if data["IncumbencyFactor"] == "Yes" else 0) +
-            data["Positive"] * 0.15 -  # Positive sentiment boosts the score
-            data["Negative"] * 0.1 +   # Negative sentiment reduces the score
-            data["Neutral"] * 0.05     # Neutral sentiment has a smaller impact
-        )
-        scores[party] = score
+# def predict_winning_party(party_data):
+#     scores = {}
+#     for party, data in party_data.items():
+#         # Adjust the weight of each factor as needed
+#         score = (
+#             data["ApprovalRating"] * 0.25 +
+#             data["RecentElectionWins"] * 0.15 +
+#             data["LeaderPopularity"] * 0.15 +
+#             data["SocialMediaInfluence"] * 0.1 +
+#             data["Funding"] * 0.1 +
+#             (10 if data["IncumbencyFactor"] == "Yes" else 0) +
+#             data["Positive"] * 0.15 -  # Positive sentiment boosts the score
+#             data["Negative"] * 0.1 +   # Negative sentiment reduces the score
+#             data["Neutral"] * 0.05     # Neutral sentiment has a smaller impact
+#         )
+#         scores[party] = score
 
-    winning_party = max(scores, key=scores.get)
-    return winning_party
-
+#     winning_party = max(scores, key=scores.get)
+#     return winning_party
 
 @app.route('/api/predict', methods=['POST'])
-def predict_endpoint():
+def predict():
+    data = request.get_json()
+    question = data.get('question')
+    
+    answer = predictions.get(question, "Sorry, I don't have an answer for that question.")
+    
+    # If the answer is a dictionary, convert it to a readable string format
+    if isinstance(answer, dict):
+        formatted_answer = "<br>".join([f"{party}: {details}" for party, details in answer.items()])
+    else:
+        formatted_answer = answer
+    
+    return jsonify({'answer': formatted_answer})
+
+# @app.route('/api/predict', methods=['POST'])
+# def predict_endpoint():
     question = request.json.get('question')
     
     if "likely to win" in question.lower():
