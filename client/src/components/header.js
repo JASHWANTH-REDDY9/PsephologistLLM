@@ -20,7 +20,7 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navcol-1">
             <ul className="navbar-nav mx-auto" style={{ fontWeight: 'bold' }}>
-              <li className="nav-item"><a className="nav-link active" href="home">Home</a></li>
+              <li className="nav-item"><a className="nav-link active" href="/">Home</a></li>
               <li className="nav-item"><a className="nav-link" href="parties">Parties</a></li>
               <li className="nav-item"><a className="nav-link" href="Dataanalysis">Data Analysis</a></li>
               <li className="nav-item"><a className="nav-link" href="prediction">Prediction</a></li>
